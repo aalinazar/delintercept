@@ -1,0 +1,19 @@
+#!/bin/bash
+
+logfile="delintercept.log"
+
+if [[ $# -eq 0 ]] ; then
+   echo "Please specify Intercept"
+   exit 1
+fi
+
+if [[ ! -d /NAS/Unprocessed/$1 ]]; then
+   echo "Incorrect Intercept name"
+   exit 1
+fi
+echo "Deleting $1"
+nohup rm -rf /NAS/Unprocessed/$1 &
+nohup rm -rf /NAS/Content/$1 &
+
+date >> $logfile
+echo "Deleting $1" >> $logfile
